@@ -36,7 +36,7 @@ spec:
     spec:
       serviceAccountName: heketi-service-account
       containers:
-      - image: heketi/heketi:dev
+      - image: heketi/heketi:9
         imagePullPolicy: IfNotPresent
         name: deploy-heketi
         env:
@@ -75,6 +75,9 @@ spec:
             port: 8080
       volumes:
       - name: db
+        glusterfs:
+          endpoints: heketi-storage-endpoints
+          path: heketidbstorage
       - name: config
         secret:
           secretName: heketi-config-secret
